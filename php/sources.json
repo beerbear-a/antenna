@@ -1,206 +1,254 @@
 [
-  {
-    "name": "まとめロッテ！",
-    "homepage": "https://matomelotte.com/",
-    "feed_url": "https://matomelotte.com/index.rdf",
-    "category": "スポーツ"
-  },
-  {
-    "name": "世界のジャンプ速報",
-    "homepage": "https://sekainojump.com/",
-    "feed_url": "https://sekainojump.com/feed/",
-    "category": "アニメ・漫画"
-  },
-  {
-    "name": "アルファルファモザイク",
-    "homepage": "https://alfalfalfa.com/",
-    "feed_url": "https://alfalfalfa.com/index.rdf",
-    "category": "ニュース"
-  },
-  {
-    "name": "ネギ速",
-    "homepage": "http://www.negisoku.com/",
-    "feed_url": "http://blog.livedoor.jp/negigasuki/index.rdf",
-    "category": "2ch_VIP"
-  },
-  {
-    "name": "超・マンガ速報",
-    "homepage": "https://chomangasokuho.blog.jp/",
-    "feed_url": "https://chomangasokuho.blog.jp/index.rdf",
-    "category": "アニメ・漫画"
-  },
-  {
-    "name": "アニゲー速報",
-    "homepage": "https://anige-sokumatome.blog.jp/",
-    "feed_url": "https://anige-sokumatome.blog.jp/index.rdf",
-    "category": "アニメ・漫画"
-  },
-  {
-    "name": "ジャンプまとめ速報",
-    "homepage": "https://jumpsokuhou.blog.jp/",
-    "feed_url": "https://jumpsokuhou.blog.jp/index.rdf",
-    "category": "アニメ・漫画"
-  },
-  {
-    "name": "ゲーム実況者速報",
-    "homepage": "https://gamejksokuhou.com/",
-    "feed_url": "https://gamejksokuhou.com/index.rdf",
-    "category": "ゲーム"
-  },
-  {
-    "name": "GUNDAM.LOG",
-    "homepage": "https://gundamlog.com/",
-    "feed_url": "https://gundamlog.com/index.rdf",
-    "category": "アニメ・漫画"
-  },
-  {
-    "name": "ウマ娘まとめ速報うまろぐ",
-    "homepage": "https://uma-log.net/",
-    "feed_url": "https://uma-log.net/feed/",
-    "category": "ゲーム"
-  },
-  {
-    "name": "ぴこ速",
-    "homepage": "https://pioncoo.net/",
-    "feed_url": "https://pioncoo.net/feed",
-    "category": "アニメ・漫画"
-  },
-  {
-    "name": "ニュー速クオリティ",
-    "homepage": "http://news4vip.livedoor.biz/",
-    "feed_url": "http://blog.livedoor.jp/news4vip2/index.rdf",
-    "category": "2ch_VIP"
-  },
-  {
-    "name": "ハムスター速報",
-    "homepage": "https://hamusoku.com/",
-    "feed_url": "http://hamusoku.com/index.rdf",
-    "category": "2ch_VIP"
-  },
-  {
-    "name": "哲学ニュースnwk",
-    "homepage": "https://nwknews.jp/",
-    "feed_url": "https://blog.livedoor.jp/nwknews/index.rdf",
-    "category": "生活・おもしろ"
-  },
-  {
-    "name": "ラブライブ!まとめブログ ぷちそく!!",
-    "homepage": "https://lovelive-petitsoku.com/",
-    "feed_url": "https://lovelive-petitsoku.com/feed/",
-    "category": "アニメ・漫画"
-  },
-  {
-    "name": "もきゅ速",
-    "homepage": "http://blog.livedoor.jp/aoba_f/",
-    "feed_url": "http://blog.livedoor.jp/aoba_f/index.rdf",
-    "category": "生活・おもしろ"
-  },
-  {
-    "name": "スマブラ屋さん",
-    "homepage": "https://sumaburayasan.com/",
-    "feed_url": null,
-    "category": "ゲーム"
-  },
-  {
-    "name": "痛いニュース(ノ∀`)",
-    "homepage": "https://itainews.com/",
-    "feed_url": "https://itainews.com/index.rdf",
-    "category": "ニュース"
-  },
-  {
-    "name": "VIPPERな俺",
-    "homepage": "https://news23vip.livedoor.blog/",
-    "feed_url": "https://news23vip.livedoor.blog/index.rdf",
-    "category": "2ch_VIP"
-  },
-  {
-    "name": "ele-king",
-    "homepage": "https://www.ele-king.net/",
-    "feed_url": "https://www.ele-king.net/atom.xml",
-    "category": "音楽"
-  },
-  {
-    "name": "Spincoaster",
-    "homepage": "https://spincoaster.com/",
-    "feed_url": "https://spincoaster.com/feed",
-    "category": "音楽"
-  },
-  {
-    "name": "Mikiki",
-    "homepage": "https://mikiki.tokyo.jp/",
-    "feed_url": "https://mikiki.tokyo.jp/list/feed/rss",
-    "category": "音楽"
-  },
-  {
-    "name": "Real Sound",
-    "homepage": "https://realsound.jp/",
-    "feed_url": "https://realsound.jp/atom.xml",
-    "category": "音楽"
-  },
-  {
-    "name": "CINRA.NET",
-    "homepage": "https://www.cinra.net/",
-    "feed_url": "https://www.cinra.net/feed",
-    "category": "アート・映画"
-  },
-  {
-    "name": "シネマトゥデイ",
-    "homepage": "https://www.cinematoday.jp/",
-    "feed_url": "https://www.cinematoday.jp/index.xml",
-    "category": "アート・映画"
-  },
-  {
-    "name": "AXIS Web",
-    "homepage": "https://www.axismag.jp/",
-    "feed_url": "https://www.axismag.jp/feed",
-    "category": "アート・映画"
-  },
-  {
-    "name": "ガジェット通信",
-    "homepage": "https://getnews.jp/",
-    "feed_url": "https://getnews.jp/feed",
-    "category": "サブカル"
-  },
-  {
-    "name": "ロケットニュース24",
-    "homepage": "https://rocketnews24.com/",
-    "feed_url": "https://rocketnews24.com/feed/",
-    "category": "サブカル"
-  },
-  {
-    "name": "おたくま経済新聞",
-    "homepage": "https://otakuma.net/",
-    "feed_url": "https://otakuma.net/feed",
-    "category": "サブカル"
-  },
-  {
-    "name": "numan",
-    "homepage": "https://numan.tokyo/",
-    "feed_url": "https://numan.tokyo/rss",
-    "category": "サブカル"
-  },
-  {
-    "name": "GIGAZINE",
-    "homepage": "https://gigazine.net/",
-    "feed_url": "https://gigazine.net/news/rss_2.0/",
-    "category": "海外カルチャー"
-  },
-  {
-    "name": "Gizmodo Japan",
-    "homepage": "https://www.gizmodo.jp/",
-    "feed_url": "https://www.gizmodo.jp/feed/index.xml",
-    "category": "海外カルチャー"
-  },
-  {
-    "name": "IGN Japan",
-    "homepage": "https://jp.ign.com/",
-    "feed_url": "https://jp.ign.com/feed.xml",
-    "category": "海外カルチャー"
-  },
-  {
-    "name": "WIRED Japan",
-    "homepage": "https://wired.jp/",
-    "feed_url": "https://wired.jp/feed/rss",
-    "category": "海外カルチャー"
-  }
+    {
+        "name": "まとめロッテ！",
+        "homepage": "https:\/\/matomelotte.com\/",
+        "feed_url": "https:\/\/matomelotte.com\/index.rdf",
+        "category": "スポーツ"
+    },
+    {
+        "name": "世界のジャンプ速報",
+        "homepage": "https:\/\/sekainojump.com\/",
+        "feed_url": "https:\/\/sekainojump.com\/feed\/",
+        "category": "アニメ・漫画"
+    },
+    {
+        "name": "アルファルファモザイク",
+        "homepage": "https:\/\/alfalfalfa.com\/",
+        "feed_url": "https:\/\/alfalfalfa.com\/index.rdf",
+        "category": "ニュース"
+    },
+    {
+        "name": "ネギ速",
+        "homepage": "http:\/\/www.negisoku.com\/",
+        "feed_url": "http:\/\/blog.livedoor.jp\/negigasuki\/index.rdf",
+        "category": "2ch_VIP"
+    },
+    {
+        "name": "超・マンガ速報",
+        "homepage": "https:\/\/chomangasokuho.blog.jp\/",
+        "feed_url": "https:\/\/chomangasokuho.blog.jp\/index.rdf",
+        "category": "アニメ・漫画"
+    },
+    {
+        "name": "アニゲー速報",
+        "homepage": "https:\/\/anige-sokumatome.blog.jp\/",
+        "feed_url": "https:\/\/anige-sokumatome.blog.jp\/index.rdf",
+        "category": "アニメ・漫画"
+    },
+    {
+        "name": "ジャンプまとめ速報",
+        "homepage": "https:\/\/jumpsokuhou.blog.jp\/",
+        "feed_url": "https:\/\/jumpsokuhou.blog.jp\/index.rdf",
+        "category": "アニメ・漫画"
+    },
+    {
+        "name": "ゲーム実況者速報",
+        "homepage": "https:\/\/gamejksokuhou.com\/",
+        "feed_url": "https:\/\/gamejksokuhou.com\/index.rdf",
+        "category": "ゲーム"
+    },
+    {
+        "name": "GUNDAM.LOG",
+        "homepage": "https:\/\/gundamlog.com\/",
+        "feed_url": "https:\/\/gundamlog.com\/index.rdf",
+        "category": "アニメ・漫画"
+    },
+    {
+        "name": "ウマ娘まとめ速報うまろぐ",
+        "homepage": "https:\/\/uma-log.net\/",
+        "feed_url": "https:\/\/uma-log.net\/feed\/",
+        "category": "ゲーム"
+    },
+    {
+        "name": "ぴこ速",
+        "homepage": "https:\/\/pioncoo.net\/",
+        "feed_url": "https:\/\/pioncoo.net\/feed",
+        "category": "アニメ・漫画"
+    },
+    {
+        "name": "ニュー速クオリティ",
+        "homepage": "http:\/\/news4vip.livedoor.biz\/",
+        "feed_url": "http:\/\/blog.livedoor.jp\/news4vip2\/index.rdf",
+        "category": "2ch_VIP"
+    },
+    {
+        "name": "ハムスター速報",
+        "homepage": "https:\/\/hamusoku.com\/",
+        "feed_url": "http:\/\/hamusoku.com\/index.rdf",
+        "category": "2ch_VIP"
+    },
+    {
+        "name": "哲学ニュースnwk",
+        "homepage": "https:\/\/nwknews.jp\/",
+        "feed_url": "https:\/\/blog.livedoor.jp\/nwknews\/index.rdf",
+        "category": "生活・おもしろ"
+    },
+    {
+        "name": "ラブライブ!まとめブログ ぷちそく!!",
+        "homepage": "https:\/\/lovelive-petitsoku.com\/",
+        "feed_url": "https:\/\/lovelive-petitsoku.com\/feed\/",
+        "category": "アニメ・漫画"
+    },
+    {
+        "name": "もきゅ速",
+        "homepage": "http:\/\/blog.livedoor.jp\/aoba_f\/",
+        "feed_url": "http:\/\/blog.livedoor.jp\/aoba_f\/index.rdf",
+        "category": "生活・おもしろ"
+    },
+    {
+        "name": "スマブラ屋さん",
+        "homepage": "https:\/\/sumaburayasan.com\/",
+        "feed_url": null,
+        "category": "ゲーム"
+    },
+    {
+        "name": "痛いニュース(ノ∀`)",
+        "homepage": "https:\/\/itainews.com\/",
+        "feed_url": "https:\/\/itainews.com\/index.rdf",
+        "category": "ニュース"
+    },
+    {
+        "name": "VIPPERな俺",
+        "homepage": "https:\/\/news23vip.livedoor.blog\/",
+        "feed_url": "https:\/\/news23vip.livedoor.blog\/index.rdf",
+        "category": "2ch_VIP"
+    },
+    {
+        "name": "ele-king",
+        "homepage": "https:\/\/www.ele-king.net\/",
+        "feed_url": "https:\/\/www.ele-king.net\/atom.xml",
+        "category": "音楽"
+    },
+    {
+        "name": "Spincoaster",
+        "homepage": "https:\/\/spincoaster.com\/",
+        "feed_url": "https:\/\/spincoaster.com\/feed",
+        "category": "音楽"
+    },
+    {
+        "name": "Mikiki",
+        "homepage": "https:\/\/mikiki.tokyo.jp\/",
+        "feed_url": "https:\/\/mikiki.tokyo.jp\/list\/feed\/rss",
+        "category": "音楽"
+    },
+    {
+        "name": "Real Sound",
+        "homepage": "https:\/\/realsound.jp\/",
+        "feed_url": "https:\/\/realsound.jp\/atom.xml",
+        "category": "音楽"
+    },
+    {
+        "name": "CINRA.NET",
+        "homepage": "https:\/\/www.cinra.net\/",
+        "feed_url": "https:\/\/www.cinra.net\/feed",
+        "category": "アート・映画"
+    },
+    {
+        "name": "シネマトゥデイ",
+        "homepage": "https:\/\/www.cinematoday.jp\/",
+        "feed_url": "https:\/\/www.cinematoday.jp\/index.xml",
+        "category": "アート・映画"
+    },
+    {
+        "name": "AXIS Web",
+        "homepage": "https:\/\/www.axismag.jp\/",
+        "feed_url": "https:\/\/www.axismag.jp\/feed",
+        "category": "アート・映画"
+    },
+    {
+        "name": "ガジェット通信",
+        "homepage": "https:\/\/getnews.jp\/",
+        "feed_url": "https:\/\/getnews.jp\/feed",
+        "category": "サブカル"
+    },
+    {
+        "name": "ロケットニュース24",
+        "homepage": "https:\/\/rocketnews24.com\/",
+        "feed_url": "https:\/\/rocketnews24.com\/feed\/",
+        "category": "サブカル"
+    },
+    {
+        "name": "おたくま経済新聞",
+        "homepage": "https:\/\/otakuma.net\/",
+        "feed_url": "https:\/\/otakuma.net\/feed",
+        "category": "サブカル"
+    },
+    {
+        "name": "numan",
+        "homepage": "https:\/\/numan.tokyo\/",
+        "feed_url": "https:\/\/numan.tokyo\/rss",
+        "category": "サブカル"
+    },
+    {
+        "name": "GIGAZINE",
+        "homepage": "https:\/\/gigazine.net\/",
+        "feed_url": "https:\/\/gigazine.net\/news\/rss_2.0\/",
+        "category": "海外カルチャー"
+    },
+    {
+        "name": "Gizmodo Japan",
+        "homepage": "https:\/\/www.gizmodo.jp\/",
+        "feed_url": "https:\/\/www.gizmodo.jp\/feed\/index.xml",
+        "category": "海外カルチャー"
+    },
+    {
+        "name": "IGN Japan",
+        "homepage": "https:\/\/jp.ign.com\/",
+        "feed_url": "https:\/\/jp.ign.com\/feed.xml",
+        "category": "海外カルチャー"
+    },
+    {
+        "name": "WIRED Japan",
+        "homepage": "https:\/\/wired.jp\/",
+        "feed_url": "https:\/\/wired.jp\/feed\/rss",
+        "category": "海外カルチャー"
+    },
+    {
+        "name": "デイリーポータルZ",
+        "homepage": "https:\/\/dailyportalz.jp\/",
+        "feed_url": "https:\/\/dailyportalz.jp\/feed\/headline",
+        "category": "サブカル"
+    },
+    {
+        "name": "KAI-YOU.net",
+        "homepage": "https:\/\/kai-you.net\/",
+        "feed_url": "https:\/\/kai-you.net\/contents\/feed.rss",
+        "category": "サブカル"
+    },
+    {
+        "name": "Pouch[ポーチ]",
+        "homepage": "https:\/\/youpouch.com\/",
+        "feed_url": "https:\/\/youpouch.com\/feed\/",
+        "category": "サブカル"
+    },
+    {
+        "name": "Jタウンネット",
+        "homepage": "https:\/\/j-town.net\/",
+        "feed_url": "https:\/\/j-town.net\/atom.xml",
+        "category": "サブカル"
+    },
+    {
+        "name": "マグミクス",
+        "homepage": "https:\/\/magmix.jp\/",
+        "feed_url": "https:\/\/magmix.jp\/feed",
+        "category": "サブカル"
+    },
+    {
+        "name": "バズプラスニュース",
+        "homepage": "https:\/\/buzz-plus.com\/",
+        "feed_url": "https:\/\/buzz-plus.com\/feed",
+        "category": "サブカル"
+    },
+    {
+        "name": "まんたんWEB",
+        "homepage": "https:\/\/mantan-web.jp\/",
+        "feed_url": "https:\/\/mantan-web.jp\/index.rss",
+        "category": "サブカル"
+    },
+    {
+        "name": "ABEMA TIMES",
+        "homepage": "https:\/\/times.abema.tv\/",
+        "feed_url": "https:\/\/times.abema.tv\/list\/feed\/rss",
+        "category": "サブカル"
+    }
 ]

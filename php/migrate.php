@@ -20,4 +20,11 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS user_category_subscriptions (
     PRIMARY KEY (user_id, category)
 )");
 
-echo "マイグレーション完了: users, user_category_subscriptions テーブルを作成しました。\n";
+$pdo->exec("CREATE TABLE IF NOT EXISTS bookmarks (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    article_id INTEGER NOT NULL REFERENCES articles(id) ON DELETE CASCADE,
+    created_at TEXT NOT NULL,
+    PRIMARY KEY (user_id, article_id)
+)");
+
+echo "マイグレーション完了: users, user_category_subscriptions, bookmarks テーブルを作成しました。\n";

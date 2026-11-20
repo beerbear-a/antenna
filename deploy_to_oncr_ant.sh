@@ -11,9 +11,11 @@ ssh udglab "test -d ~/www/oncr-ant.flop.jp" || { echo "まだディレクトリ�
 
 echo "--- PHPファイル一式をアップロード ---"
 scp "$LOCAL_PHP_DIR"/config.php "$LOCAL_PHP_DIR"/db.php "$LOCAL_PHP_DIR"/auth_common.php \
-    "$LOCAL_PHP_DIR"/migrate.php "$LOCAL_PHP_DIR"/register.php "$LOCAL_PHP_DIR"/login.php \
-    "$LOCAL_PHP_DIR"/logout.php "$LOCAL_PHP_DIR"/settings.php "$LOCAL_PHP_DIR"/index.php \
-    "$LOCAL_PHP_DIR"/fetch.php "$LOCAL_PHP_DIR"/sources.json "$LOCAL_PHP_DIR"/ng_words.json \
+    "$LOCAL_PHP_DIR"/feed_common.php "$LOCAL_PHP_DIR"/migrate.php "$LOCAL_PHP_DIR"/register.php \
+    "$LOCAL_PHP_DIR"/login.php "$LOCAL_PHP_DIR"/logout.php "$LOCAL_PHP_DIR"/settings.php \
+    "$LOCAL_PHP_DIR"/index.php "$LOCAL_PHP_DIR"/more.php "$LOCAL_PHP_DIR"/bookmark_toggle.php \
+    "$LOCAL_PHP_DIR"/fetch.php \
+    "$LOCAL_PHP_DIR"/sources.json "$LOCAL_PHP_DIR"/ng_words.json \
     udglab:$REMOTE_DIR/
 
 echo "--- クリーンな(テストユーザーを含まない)articlesデータを配置 ---"
