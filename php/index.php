@@ -225,9 +225,45 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   }
   footer { text-align: center; color: #44444c; font-size: 11px; padding: 10px 0 36px; letter-spacing: 0.03em; }
   .empty { text-align: center; color: #5c5c66; padding: 60px 0; font-size: 13px; }
+  .mode-toggle-btn {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); color: #9a9aa3;
+    border-radius: 999px; padding: 5px 12px; font-size: 11.5px; cursor: pointer;
+    letter-spacing: 0.01em; transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .mode-toggle-btn:hover { color: #e7e7ea; border-color: rgba(255,255,255,0.18); }
+  .mode-toggle-btn.active { color: #fff; background: #d9603b; border-color: #d9603b; }
+  .columns-wrap {
+    display: flex; gap: 1px; height: calc(100vh - 57px);
+    overflow-x: auto; overflow-y: hidden; background: rgba(255,255,255,0.05);
+  }
+  .column {
+    flex: 0 0 320px; width: 320px; display: flex; flex-direction: column;
+    background: #15151a; height: 100%;
+  }
+  .column-header {
+    padding: 12px 14px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em;
+    color: #c7c7ce; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .column-header .col-pulse {
+    width: 6px; height: 6px; border-radius: 50%; background: #3a8f5c;
+    opacity: 0; transition: opacity 0.2s ease;
+  }
+  .column-header .col-pulse.show { opacity: 1; }
+  .column-body { flex: 1; overflow-y: auto; padding: 8px; }
+  .column-body ul.articles { gap: 6px; }
+  .column-body ul.articles a.card { padding: 12px 14px; }
+  .column-body ul.articles .title { font-size: 13px; }
+  .column-body .empty { padding: 30px 0; font-size: 12px; }
+  @keyframes newArrival {
+    from { background: rgba(217,96,59,0.25); }
+    to { background: rgba(255,255,255,0.035); }
+  }
+  .column-body ul.articles li.new-arrival a.card { animation: newArrival 2.5s ease; }
   @media (max-width: 480px) {
     header { padding: 12px 16px; }
     nav, form.search { padding-left: 16px; padding-right: 16px; }
+    .column { flex-basis: 86vw; width: 86vw; }
   }
 </style>
 </head>
@@ -237,8 +273,9 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     <h1>オンシラズアンテナ</h1>
     <?php if ($refreshedAt): ?><div class="refresh">更新 <?= h(relative_time($refreshedAt)) ?></div><?php endif; ?>
   </div>
-  <?php if (LOGIN_ENABLED): ?>
   <div class="userbar">
+    <button type="button" id="mode-toggle" class="mode-toggle-btn">⊞ マルチカラム</button>
+    <?php if (LOGIN_ENABLED): ?>
     <?php if ($user): ?>
       <?= h($user['display_name'] ?: $user['username']) ?>
       <a href="/settings.php">設定</a>
@@ -246,9 +283,10 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     <?php else: ?>
       <a href="/login.php">ログイン</a>
     <?php endif; ?>
+    <?php endif; ?>
   </div>
-  <?php endif; ?>
 </header>
+<div id="single-view">
 <nav id="category-nav"><?= $navHtml ?></nav>
 <form class="search" method="get" action="/" id="search-form">
   <?= $categoryHidden ?>
@@ -268,6 +306,10 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
      data-view="<?= $view ?>"></div>
 <div class="loading-indicator" id="loading-indicator" style="display:none;">読み込み中…</div>
 </main>
+</div>
+<div id="multi-column-view" style="display:none;">
+  <div class="columns-wrap" id="columns-wrap"></div>
+</div>
 <footer>オンシラズアンテナ</footer>
 <script id="categories-data" type="application/json"><?= $categoriesJson ?></script>
 <script>
@@ -511,6 +553,128 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     if (nextCategory === current || (nextCategory === null && current === '')) return;
     loadView({ view: 'feed', category: nextCategory, q: sentinel.dataset.q || null }, true);
   }, { passive: true });
+
+  // マルチカラム表示(TweetDeck風、カテゴリごとに列を並べて定期的に新着をチェックする)
+  var modeToggle = document.getElementById('mode-toggle');
+  var singleView = document.getElementById('single-view');
+  var multiView = document.getElementById('multi-column-view');
+  var columnsWrap = document.getElementById('columns-wrap');
+  var MULTI_POLL_MS = 45000;
+  var columnsBuilt = false;
+  var pollTimer = null;
+  var columnSeen = {}; // category -> Set of href
+
+  function columnArticlesHtml(data) {
+    if (data.html) return data.html;
+    return '<div class="empty">' + (data.empty_message || '記事がありません。') + '</div>';
+  }
+
+  function extractHrefs(container) {
+    return Array.prototype.map.call(container.querySelectorAll('a.card'), function (a) { return a.href; });
+  }
+
+  function buildColumn(category) {
+    var col = document.createElement('div');
+    col.className = 'column';
+    col.innerHTML =
+      '<div class="column-header"><span>' + category + '</span><span class="col-pulse"></span></div>' +
+      '<div class="column-body"><ul class="articles"></ul></div>';
+    columnsWrap.appendChild(col);
+    columnSeen[category] = {};
+
+    var body = col.querySelector('.column-body');
+    var ul = col.querySelector('ul.articles');
+
+    fetch('/more.php?' + new URLSearchParams({ offset: 0, category: category, q: '', view: '' }).toString())
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.html) {
+          ul.innerHTML = data.html;
+          extractHrefs(ul).forEach(function (href) { columnSeen[category][href] = true; });
+        } else {
+          body.innerHTML = '<div class="empty">' + (data.empty_message || '記事がありません。') + '</div>';
+        }
+      })
+      .catch(function () {});
+  }
+
+  function buildColumns() {
+    if (columnsBuilt) return;
+    columnsBuilt = true;
+    columnsWrap.innerHTML = '';
+    categories.forEach(buildColumn);
+  }
+
+  function pollOneColumn(col, category) {
+    var ul = col.querySelector('ul.articles');
+    var pulse = col.querySelector('.col-pulse');
+    if (!ul) return;
+    fetch('/more.php?' + new URLSearchParams({ offset: 0, category: category, q: '', view: '' }).toString())
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data.html) return;
+        var tmp = document.createElement('ul');
+        tmp.innerHTML = data.html;
+        var newItems = Array.prototype.filter.call(tmp.children, function (li) {
+          var a = li.querySelector('a.card');
+          return a && !columnSeen[category][a.href];
+        });
+        if (newItems.length === 0) return;
+        newItems.reverse().forEach(function (li) {
+          var a = li.querySelector('a.card');
+          columnSeen[category][a.href] = true;
+          li.classList.add('new-arrival');
+          ul.insertBefore(li, ul.firstChild);
+        });
+        // 列が際限なく伸びないよう古い記事を間引く
+        while (ul.children.length > 60) {
+          var last = ul.lastElementChild;
+          var lastA = last.querySelector('a.card');
+          if (lastA) delete columnSeen[category][lastA.href];
+          ul.removeChild(last);
+        }
+        if (pulse) {
+          pulse.classList.add('show');
+          setTimeout(function () { pulse.classList.remove('show'); }, 1500);
+        }
+      })
+      .catch(function () {});
+  }
+
+  function pollAllColumns() {
+    if (multiView.style.display === 'none') return;
+    Array.prototype.forEach.call(columnsWrap.children, function (col) {
+      var category = col.querySelector('.column-header span').textContent;
+      pollOneColumn(col, category);
+    });
+  }
+
+  function setMode(mode, persist) {
+    if (mode === 'multi') {
+      singleView.style.display = 'none';
+      multiView.style.display = 'block';
+      modeToggle.classList.add('active');
+      buildColumns();
+      if (!pollTimer) pollTimer = setInterval(pollAllColumns, MULTI_POLL_MS);
+    } else {
+      singleView.style.display = '';
+      multiView.style.display = 'none';
+      modeToggle.classList.remove('active');
+    }
+    if (persist) {
+      try { localStorage.setItem('antenna_view_mode', mode); } catch (e) {}
+    }
+  }
+
+  modeToggle.addEventListener('click', function () {
+    setMode(multiView.style.display === 'none' ? 'multi' : 'single', true);
+  });
+
+  if (categories.length > 0) {
+    try {
+      if (localStorage.getItem('antenna_view_mode') === 'multi') setMode('multi', false);
+    } catch (e) {}
+  }
 })();
 </script>
 </body>
