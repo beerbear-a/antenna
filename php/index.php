@@ -164,6 +164,12 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   form.search button:hover { border-color: #d9603b; color: #d9603b; }
   form.search a.clear { color: #5c5c66; font-size: 12px; text-decoration: none; }
   form.search a.clear:hover { color: #9a9aa3; }
+  .kbd-hint { color: #3a3a40; font-size: 10.5px; margin-left: auto; white-space: nowrap; }
+  .kbd-hint kbd {
+    font-family: inherit; background: rgba(255,255,255,0.06); border-radius: 4px;
+    padding: 1px 5px; margin: 0 1px; color: #70707a;
+  }
+  @media (max-width: 700px) { .kbd-hint { display: none; } }
   main { max-width: 720px; margin: 0 auto; padding: 4px 16px 80px; touch-action: pan-y; }
   ul.articles {
     list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;
@@ -187,6 +193,11 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     margin-bottom: 9px; line-height: 1.55;
   }
   ul.articles a.card:hover .title { color: #e98a62; }
+  ul.articles a.card:visited .title { color: #6b6b74; }
+  ul.articles a.card:visited.kbd-focus .title { color: #8a8a93; }
+  ul.articles a.card.kbd-focus {
+    background: rgba(255,255,255,0.07); border-color: #d9603b;
+  }
   .meta { font-size: 11px; color: #6a6a73; display: flex; align-items: center; gap: 7px; }
   .meta .favicon {
     width: 13px; height: 13px; border-radius: 3px; vertical-align: middle;
@@ -241,6 +252,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   <input type="text" name="q" value="<?= h($search ?? '') ?>" placeholder="キーワード検索">
   <button type="submit">検索</button>
   <?= $clearLink ?>
+  <span class="kbd-hint"><kbd>j</kbd><kbd>k</kbd>移動 <kbd>Enter</kbd>開く <kbd>/</kbd>検索</span>
 </form>
 <main id="main-content">
 <ul class="articles" id="article-list"><?= $itemsHtml ?></ul>
@@ -299,6 +311,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
       .then(function (r) { return r.json(); })
       .then(function (data) {
         list.innerHTML = data.html || '';
+        focusedCard = null;
         emptyState.style.display = data.empty_message ? '' : 'none';
         emptyState.textContent = data.empty_message || '';
         sentinel.dataset.offset = data.next_offset;
@@ -415,6 +428,56 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
       if (entry.isIntersecting) loadMore();
     });
   }, { rootMargin: '600px' }).observe(sentinel);
+
+  // キーボードナビゲーション(j/k で記事移動、Enter/oで開く、/ で検索へ)
+  var focusedCard = null;
+
+  function cards() {
+    return Array.prototype.slice.call(list.querySelectorAll('a.card'));
+  }
+
+  function setFocusedCard(card) {
+    if (focusedCard) focusedCard.classList.remove('kbd-focus');
+    focusedCard = card;
+    if (focusedCard) {
+      focusedCard.classList.add('kbd-focus');
+      focusedCard.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }
+
+  function moveFocus(delta) {
+    var list_ = cards();
+    if (list_.length === 0) return;
+    var idx = focusedCard ? list_.indexOf(focusedCard) : -1;
+    var nextIdx = idx + delta;
+    if (nextIdx < 0) nextIdx = 0;
+    if (nextIdx >= list_.length) nextIdx = list_.length - 1;
+    setFocusedCard(list_[nextIdx]);
+  }
+
+  document.addEventListener('keydown', function (e) {
+    var tag = document.activeElement && document.activeElement.tagName;
+    var typing = tag === 'INPUT' || tag === 'TEXTAREA';
+
+    if (e.key === '/' && !typing) {
+      e.preventDefault();
+      searchInput.focus();
+      return;
+    }
+    if (e.key === 'Escape') {
+      if (typing) document.activeElement.blur();
+      setFocusedCard(null);
+      return;
+    }
+    if (typing) return;
+
+    if (e.key === 'j') { e.preventDefault(); moveFocus(1); }
+    else if (e.key === 'k') { e.preventDefault(); moveFocus(-1); }
+    else if ((e.key === 'Enter' || e.key === 'o') && focusedCard) {
+      e.preventDefault();
+      window.open(focusedCard.href, '_blank', 'noopener');
+    }
+  });
 
   // 横スワイプでカテゴリ切替(フィード表示中のみ、ブックマーク表示中は対象外)
   var touchStartX = 0, touchStartY = 0, swiping = false;
