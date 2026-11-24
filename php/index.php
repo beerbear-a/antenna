@@ -239,16 +239,22 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   .column {
     flex: 0 0 320px; width: 320px; display: flex; flex-direction: column;
     background: #15151a; height: 100%;
-    border-top: 3px solid var(--col-accent, transparent);
+    border-left: 1px solid rgba(255,255,255,0.05);
   }
+  .column:first-child { border-left: none; }
   .column-header {
-    padding: 11px 14px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em;
-    color: var(--col-accent, #c7c7ce); border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
-    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+    color: #aeaeb5; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
+    display: flex; align-items: center; gap: 8px;
   }
+  .column-header .cat-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    background: var(--col-accent, #777);
+  }
+  .column-header .col-title { flex: 1; }
   .column-header .col-pulse {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--col-accent, #3a8f5c);
-    opacity: 0; transition: opacity 0.2s ease;
+    width: 6px; height: 6px; border-radius: 50%; background: #e0754f;
+    opacity: 0; transition: opacity 0.2s ease; flex-shrink: 0;
   }
   .column-header .col-pulse.show { opacity: 1; }
   .column-body { flex: 1; overflow-y: auto; padding: 8px; }
@@ -319,8 +325,8 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   body.light-theme footer { color: #c2c0b8; }
   body.light-theme .empty { color: #a8a69e; }
   body.light-theme .columns-wrap { background: rgba(0,0,0,0.06); }
-  body.light-theme .column { background: #fbfaf8; }
-  body.light-theme .column-header { border-bottom-color: rgba(0,0,0,0.07); }
+  body.light-theme .column { background: #fbfaf8; border-left-color: rgba(0,0,0,0.06); }
+  body.light-theme .column-header { color: #6b6b74; border-bottom-color: rgba(0,0,0,0.07); }
   body.light-theme .column-body ul.articles a.card { box-shadow: none; border-color: rgba(0,0,0,0.07); }
 </style>
 </head>
@@ -626,25 +632,29 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     return Array.prototype.map.call(container.querySelectorAll('a.card'), function (a) { return a.href; });
   }
 
-  // カテゴリごとに色相をずらして色分けする(マルチカラム表示専用)
-  function categoryHue(category) {
+  // カテゴリごとの色分け(マルチカラム表示専用)。派手な原色を避け、落ち着いたパレットを使う
+  var CATEGORY_PALETTE = [
+    '#c0604a', '#6b8f71', '#5b7c99', '#a36b8c', '#c99a3e', '#707a8a',
+    '#b36b6b', '#4f9b96', '#8a5a8f', '#b08d57', '#6b8a5a', '#46617a', '#8a8378'
+  ];
+
+  function categoryColor(category) {
     var idx = categories.indexOf(category);
     if (idx < 0) idx = 0;
-    return Math.round((idx * 360) / Math.max(categories.length, 1));
+    return CATEGORY_PALETTE[idx % CATEGORY_PALETTE.length];
   }
 
   function applyColumnColor(col, category) {
-    var hue = categoryHue(category);
-    var isLight = document.body.classList.contains('light-theme');
-    col.style.setProperty('--col-accent', 'hsl(' + hue + ', 62%, ' + (isLight ? 40 : 64) + '%)');
-    col.style.setProperty('--col-tag-bg', 'hsla(' + hue + ', 62%, 50%, 0.16)');
+    var color = categoryColor(category);
+    col.style.setProperty('--col-accent', color);
+    col.style.setProperty('--col-tag-bg', color + '26'); // 約15%不透明度
   }
 
   function buildColumn(category) {
     var col = document.createElement('div');
     col.className = 'column';
     col.innerHTML =
-      '<div class="column-header"><span>' + category + '</span><span class="col-pulse"></span></div>' +
+      '<div class="column-header"><span class="cat-dot"></span><span class="col-title">' + category + '</span><span class="col-pulse"></span></div>' +
       '<div class="column-body"><ul class="articles"></ul></div>';
     applyColumnColor(col, category);
     columnsWrap.appendChild(col);
@@ -712,7 +722,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   function pollAllColumns() {
     if (multiView.style.display === 'none') return;
     Array.prototype.forEach.call(columnsWrap.children, function (col) {
-      var category = col.querySelector('.column-header span').textContent;
+      var category = col.querySelector('.col-title').textContent;
       pollOneColumn(col, category);
     });
   }
@@ -752,7 +762,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     themeToggle.classList.toggle('active', theme === 'light');
     themeToggle.textContent = theme === 'light' ? '● ダーク' : '☀ ライト';
     Array.prototype.forEach.call(columnsWrap.children, function (col) {
-      var category = col.querySelector('.column-header span').textContent;
+      var category = col.querySelector('.col-title').textContent;
       applyColumnColor(col, category);
     });
     if (persist) {
