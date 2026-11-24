@@ -268,5 +268,59 @@
         "homepage": "https:\/\/bunshun.jp\/",
         "feed_url": "https:\/\/bunshun.jp\/list\/feed\/rss",
         "category": "サブカル"
+    },
+    {
+        "name": "NHKニュース",
+        "homepage": "https:\/\/www3.nhk.or.jp\/news\/",
+        "feed_url": "https:\/\/www3.nhk.or.jp\/rss\/news\/cat0.xml",
+        "category": "ニュース"
+    },
+    {
+        "name": "Yahoo!ニュース",
+        "homepage": "https:\/\/news.yahoo.co.jp\/",
+        "feed_url": "https:\/\/news.yahoo.co.jp\/rss\/topics\/top-picks.xml",
+        "category": "ニュース"
+    },
+    {
+        "name": "朝日新聞デジタル",
+        "homepage": "https:\/\/www.asahi.com\/",
+        "feed_url": "https:\/\/www.asahi.com\/rss\/asahi\/newsheadlines.rdf",
+        "category": "ニュース"
+    },
+    {
+        "name": "毎日新聞",
+        "homepage": "https:\/\/mainichi.jp\/",
+        "feed_url": "https:\/\/mainichi.jp\/rss\/etc\/mainichi-flash.rss",
+        "category": "ニュース"
+    },
+    {
+        "name": "CNN.co.jp",
+        "homepage": "https:\/\/www.cnn.co.jp\/",
+        "feed_url": "http:\/\/feeds.cnn.co.jp\/cnn\/rss",
+        "category": "ニュース"
+    },
+    {
+        "name": "Full-Count",
+        "homepage": "https:\/\/full-count.jp\/",
+        "feed_url": "https:\/\/full-count.jp\/feed",
+        "category": "スポーツ"
+    },
+    {
+        "name": "Number Web",
+        "homepage": "https:\/\/number.bunshun.jp\/",
+        "feed_url": "https:\/\/number.bunshun.jp\/list\/rsssports",
+        "category": "スポーツ"
+    },
+    {
+        "name": "4Gamer",
+        "homepage": "https:\/\/www.4gamer.net\/",
+        "feed_url": "https:\/\/www.4gamer.net\/rss\/index.xml",
+        "category": "ゲーム"
+    },
+    {
+        "name": "ASCII.jp",
+        "homepage": "https:\/\/ascii.jp\/",
+        "feed_url": "https:\/\/ascii.jp\/rss.xml",
+        "category": "海外カルチャー"
     }
 ]

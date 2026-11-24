@@ -239,14 +239,15 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   .column {
     flex: 0 0 320px; width: 320px; display: flex; flex-direction: column;
     background: #15151a; height: 100%;
+    border-top: 3px solid var(--col-accent, transparent);
   }
   .column-header {
-    padding: 12px 14px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em;
-    color: #c7c7ce; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
+    padding: 11px 14px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em;
+    color: var(--col-accent, #c7c7ce); border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
     display: flex; align-items: center; justify-content: space-between;
   }
   .column-header .col-pulse {
-    width: 6px; height: 6px; border-radius: 50%; background: #3a8f5c;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--col-accent, #3a8f5c);
     opacity: 0; transition: opacity 0.2s ease;
   }
   .column-header .col-pulse.show { opacity: 1; }
@@ -254,6 +255,9 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   .column-body ul.articles { gap: 6px; }
   .column-body ul.articles a.card { padding: 12px 14px; }
   .column-body ul.articles .title { font-size: 13px; }
+  .column-body ul.articles .meta .cat {
+    background: var(--col-tag-bg, rgba(217,96,59,0.14)); color: var(--col-accent, #c48a6f);
+  }
   .column-body .empty { padding: 30px 0; font-size: 12px; }
   @keyframes newArrival {
     from { background: rgba(217,96,59,0.25); }
@@ -265,6 +269,59 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     nav, form.search { padding-left: 16px; padding-right: 16px; }
     .column { flex-basis: 86vw; width: 86vw; }
   }
+
+  /* ライトテーマ(マルチカラム表示の視認性向上向け、ヘッダーのボタンで全体に切替可) */
+  body.light-theme { background: #f6f5f2; color: #1c1c1e; }
+  body.light-theme { scrollbar-color: rgba(0,0,0,0.18) #f6f5f2; }
+  body.light-theme ::-webkit-scrollbar-track { background: #f6f5f2; }
+  body.light-theme ::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.14); border: 2px solid #f6f5f2; }
+  body.light-theme ::-webkit-scrollbar-thumb:hover { background-color: rgba(0,0,0,0.22); }
+  body.light-theme header { background: rgba(246,245,242,0.85); border-bottom-color: rgba(0,0,0,0.07); }
+  body.light-theme header h1 { color: #6b6b74; }
+  body.light-theme header .refresh { color: #9a9890; }
+  body.light-theme .userbar { color: #8a8880; }
+  body.light-theme .userbar a { color: #6b6b74; }
+  body.light-theme .userbar a:hover { color: #1c1c1e; }
+  body.light-theme .mode-toggle-btn, body.light-theme .theme-toggle-btn {
+    background: #fff; border-color: rgba(0,0,0,0.1); color: #6b6b74;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  body.light-theme .mode-toggle-btn:hover, body.light-theme .theme-toggle-btn:hover { color: #1c1c1e; border-color: rgba(0,0,0,0.18); }
+  body.light-theme .mode-toggle-btn.active { color: #fff; background: #d9603b; border-color: #d9603b; }
+  body.light-theme nav a {
+    background: #fff; border-color: rgba(0,0,0,0.08); color: #6b6b74;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  body.light-theme nav a:hover { color: #1c1c1e; border-color: rgba(0,0,0,0.16); }
+  body.light-theme nav a.active { color: #fff; background: #d9603b; border-color: #d9603b; }
+  body.light-theme form.search input[type="text"] {
+    background: #fff; border-color: rgba(0,0,0,0.1); color: #1c1c1e;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  body.light-theme form.search input[type="text"]::placeholder { color: #a8a69e; }
+  body.light-theme form.search button {
+    background: #fff; border-color: rgba(0,0,0,0.1); color: #6b6b74;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  body.light-theme form.search a.clear { color: #a8a69e; }
+  body.light-theme form.search a.clear:hover { color: #6b6b74; }
+  body.light-theme .kbd-hint { color: #c2c0b8; }
+  body.light-theme .kbd-hint kbd { background: #fff; color: #8a8880; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  body.light-theme ul.articles a.card {
+    background: #fff; border-color: rgba(0,0,0,0.06);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.035);
+  }
+  body.light-theme ul.articles a.card:hover { background: #fff; border-color: rgba(217,96,59,0.35); box-shadow: 0 3px 10px rgba(0,0,0,0.07); }
+  body.light-theme ul.articles .title { color: #1c1c1e; }
+  body.light-theme ul.articles a.card:visited .title { color: #a8a69e; }
+  body.light-theme .meta { color: #9a9890; }
+  body.light-theme .meta .time { color: #b5b3ab; }
+  body.light-theme footer { color: #c2c0b8; }
+  body.light-theme .empty { color: #a8a69e; }
+  body.light-theme .columns-wrap { background: rgba(0,0,0,0.06); }
+  body.light-theme .column { background: #fbfaf8; }
+  body.light-theme .column-header { border-bottom-color: rgba(0,0,0,0.07); }
+  body.light-theme .column-body ul.articles a.card { box-shadow: none; border-color: rgba(0,0,0,0.07); }
 </style>
 </head>
 <body>
@@ -274,6 +331,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     <?php if ($refreshedAt): ?><div class="refresh">更新 <?= h(relative_time($refreshedAt)) ?></div><?php endif; ?>
   </div>
   <div class="userbar">
+    <button type="button" id="theme-toggle" class="mode-toggle-btn theme-toggle-btn">☀ ライト</button>
     <button type="button" id="mode-toggle" class="mode-toggle-btn">⊞ マルチカラム</button>
     <?php if (LOGIN_ENABLED): ?>
     <?php if ($user): ?>
@@ -564,13 +622,22 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
   var pollTimer = null;
   var columnSeen = {}; // category -> Set of href
 
-  function columnArticlesHtml(data) {
-    if (data.html) return data.html;
-    return '<div class="empty">' + (data.empty_message || '記事がありません。') + '</div>';
-  }
-
   function extractHrefs(container) {
     return Array.prototype.map.call(container.querySelectorAll('a.card'), function (a) { return a.href; });
+  }
+
+  // カテゴリごとに色相をずらして色分けする(マルチカラム表示専用)
+  function categoryHue(category) {
+    var idx = categories.indexOf(category);
+    if (idx < 0) idx = 0;
+    return Math.round((idx * 360) / Math.max(categories.length, 1));
+  }
+
+  function applyColumnColor(col, category) {
+    var hue = categoryHue(category);
+    var isLight = document.body.classList.contains('light-theme');
+    col.style.setProperty('--col-accent', 'hsl(' + hue + ', 62%, ' + (isLight ? 40 : 64) + '%)');
+    col.style.setProperty('--col-tag-bg', 'hsla(' + hue + ', 62%, 50%, 0.16)');
   }
 
   function buildColumn(category) {
@@ -579,6 +646,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     col.innerHTML =
       '<div class="column-header"><span>' + category + '</span><span class="col-pulse"></span></div>' +
       '<div class="column-body"><ul class="articles"></ul></div>';
+    applyColumnColor(col, category);
     columnsWrap.appendChild(col);
     columnSeen[category] = {};
 
@@ -675,6 +743,30 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
       if (localStorage.getItem('antenna_view_mode') === 'multi') setMode('multi', false);
     } catch (e) {}
   }
+
+  // ライト/ダークテーマ切替
+  var themeToggle = document.getElementById('theme-toggle');
+
+  function setTheme(theme, persist) {
+    document.body.classList.toggle('light-theme', theme === 'light');
+    themeToggle.classList.toggle('active', theme === 'light');
+    themeToggle.textContent = theme === 'light' ? '● ダーク' : '☀ ライト';
+    Array.prototype.forEach.call(columnsWrap.children, function (col) {
+      var category = col.querySelector('.column-header span').textContent;
+      applyColumnColor(col, category);
+    });
+    if (persist) {
+      try { localStorage.setItem('antenna_theme', theme); } catch (e) {}
+    }
+  }
+
+  themeToggle.addEventListener('click', function () {
+    setTheme(document.body.classList.contains('light-theme') ? 'dark' : 'light', true);
+  });
+
+  try {
+    if (localStorage.getItem('antenna_theme') === 'light') setTheme('light', false);
+  } catch (e) {}
 })();
 </script>
 </body>
