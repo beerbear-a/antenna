@@ -250,5 +250,23 @@
         "homepage": "https:\/\/times.abema.tv\/",
         "feed_url": "https:\/\/times.abema.tv\/list\/feed\/rss",
         "category": "サブカル"
+    },
+    {
+        "name": "HAGAZINE",
+        "homepage": "https:\/\/hagamag.com\/",
+        "feed_url": "https:\/\/hagamag.com\/feed",
+        "category": "人文・教養"
+    },
+    {
+        "name": "webちくま",
+        "homepage": "https:\/\/www.webchikuma.jp\/",
+        "feed_url": "https:\/\/www.webchikuma.com\/rss",
+        "category": "人文・教養"
+    },
+    {
+        "name": "文春オンライン",
+        "homepage": "https:\/\/bunshun.jp\/",
+        "feed_url": "https:\/\/bunshun.jp\/list\/feed\/rss",
+        "category": "サブカル"
     }
 ]

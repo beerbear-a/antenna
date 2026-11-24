@@ -13,7 +13,7 @@ $BASE_DIR = __DIR__;
 $NG_WORDS_PATH = $BASE_DIR . '/ng_words.json';
 $SOURCES_PATH = $BASE_DIR . '/sources.json';
 
-$CATEGORY_ORDER = ["ニュース", "2ch_VIP", "アニメ・漫画", "ゲーム", "スポーツ", "芸能_YouTube", "生活・おもしろ", "音楽", "アート・映画", "サブカル", "海外カルチャー", "不明"];
+$CATEGORY_ORDER = ["ニュース", "2ch_VIP", "アニメ・漫画", "ゲーム", "スポーツ", "芸能_YouTube", "生活・おもしろ", "音楽", "アート・映画", "人文・教養", "サブカル", "海外カルチャー", "不明"];
 
 $pdo = get_pdo();
 
