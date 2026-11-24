@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/auth_common.php';
 
+if (!LOGIN_ENABLED) {
+    header('Location: /index.php');
+    exit;
+}
+
 function h(string $s): string {
     return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
 }

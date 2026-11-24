@@ -152,12 +152,14 @@ function render_article_item(array $a, array $domains, bool $loggedIn, bool $isB
     $faviconHtml = $domain
         ? sprintf('<img class="favicon" src="https://%s/favicon.ico" onerror="this.style.visibility=\'hidden\'">', h($domain))
         : '';
-    $bookmarkBtn = sprintf(
-        '<button type="button" class="bookmark-btn%s" data-article-id="%d" data-logged-in="%s" aria-label="ブックマーク">%s</button>',
-        $isBookmarked ? ' active' : '', (int)$a['id'], $loggedIn ? '1' : '0', $isBookmarked ? '★' : '☆'
-    );
+    // ログイン機能が無効な間はブックマークボタン自体を出さない(LOGIN_ENABLEDで復活可能)
+    $bookmarkBtn = $loggedIn ? sprintf(
+        '<button type="button" class="bookmark-btn%s" data-article-id="%d" data-logged-in="1" aria-label="ブックマーク">%s</button>',
+        $isBookmarked ? ' active' : '', (int)$a['id'], $isBookmarked ? '★' : '☆'
+    ) : '';
+    $itemClass = $loggedIn ? 'article-item' : 'article-item no-bookmark';
     return sprintf(
-        '<li class="article-item">%s<a class="card" href="%s" target="_blank" rel="noopener"><div class="title">%s</div><div class="meta">%s<span class="cat">%s</span><span class="dot">·</span><span>%s</span><span class="time">%s</span></div></a></li>',
-        $bookmarkBtn, h($a['link']), h($a['title']), $faviconHtml, h($cat), h($a['source_name']), relative_time($a['published_at'] ?: $a['fetched_at'])
+        '<li class="%s">%s<a class="card" href="%s" target="_blank" rel="noopener"><div class="title">%s</div><div class="meta">%s<span class="cat">%s</span><span class="dot">·</span><span>%s</span><span class="time">%s</span></div></a></li>',
+        $itemClass, $bookmarkBtn, h($a['link']), h($a['title']), $faviconHtml, h($cat), h($a['source_name']), relative_time($a['published_at'] ?: $a['fetched_at'])
     );
 }

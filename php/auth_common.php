@@ -12,6 +12,7 @@ function ensure_session(): void {
 }
 
 function current_user(): ?array {
+    if (!LOGIN_ENABLED) return null;
     ensure_session();
     if (empty($_SESSION['user_id'])) {
         return null;

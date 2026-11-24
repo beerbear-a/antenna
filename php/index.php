@@ -184,6 +184,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     border: 1px solid rgba(255,255,255,0.045);
     transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
   }
+  ul.articles .no-bookmark a.card { padding-left: 18px; }
   ul.articles a.card:hover {
     background: rgba(255,255,255,0.065); border-color: rgba(255,255,255,0.09);
     transform: translateY(-1px);
@@ -236,6 +237,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
     <h1>オンシラズアンテナ</h1>
     <?php if ($refreshedAt): ?><div class="refresh">更新 <?= h(relative_time($refreshedAt)) ?></div><?php endif; ?>
   </div>
+  <?php if (LOGIN_ENABLED): ?>
   <div class="userbar">
     <?php if ($user): ?>
       <?= h($user['display_name'] ?: $user['username']) ?>
@@ -245,6 +247,7 @@ $categoriesJson = json_encode(array_values($categories), JSON_UNESCAPED_UNICODE 
       <a href="/login.php">ログイン</a>
     <?php endif; ?>
   </div>
+  <?php endif; ?>
 </header>
 <nav id="category-nav"><?= $navHtml ?></nav>
 <form class="search" method="get" action="/" id="search-form">
